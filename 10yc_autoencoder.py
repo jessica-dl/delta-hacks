@@ -84,8 +84,9 @@ def autoencoder():
 def test(model, test_image, test_age):
     print(test_image.shape, test_age.shape)
     pred = model.predict([test_image, test_age])
-    print(pred)
-    cv2.imwrite('output.jpg', pred[0])
+    pred *= 256
+    print(pred.shape)
+    cv2.imwrite('output.png', pred[0])
 
 
 batch_size = 32
