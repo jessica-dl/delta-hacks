@@ -120,7 +120,7 @@ def train(model):
     X0 = np.stack(X0)
     X1 = np.stack(X1)  
 
-    model.fit([X0, X1], X0, batch_size=32, epochs=10, verbose=1)
+    model.fit([X0, X1], X0, batch_size=32, epochs=50, verbose=1)
     model.save('model.h5')
 
 
