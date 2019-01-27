@@ -6,11 +6,11 @@ import csv
 import pandas as pd
 import wget
 ####input your credentials here
-consumer_key = 'h5DpSbZoGY0F1nyKI3DgbRgYk'
-consumer_secret = 'YCWfBqtrAR5DYm5IONatwiV3wWqxWZhZFosfnxTrgCXnIl5ECg'
+consumer_key = 'here'
+consumer_secret = 'here'
 
-access_token = '1089246037162758144-U8PcYG55ZlMMtEO7kKtk1sFlgVLn7w'
-access_token_secret = 'LlC0WgmS6sMnRHMSIpqoDFVwg0uE5hR5HEB0Upa0VVOFD'
+access_token = 'here'
+access_token_secret = 'here'
 
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
