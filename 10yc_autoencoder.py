@@ -1,6 +1,8 @@
 import numpy as np
 import time
 import cv2
+import os
+import json
 
 from keras.models import Sequential
 from keras.layers import Dense, Activation, Flatten, Reshape
@@ -88,10 +90,43 @@ def test(model, test_image, test_age):
     print(pred.shape)
     cv2.imwrite('output.png', pred[0])
 
+def train(model):
+    # Load data
+    X0 = []
+    X1 = []
+    
+    with open('data.json') as data_file:
+        data = json.load(data_file)
+
+    for datum in data:
+        X0.append(cv2.imread('images/' + datum['file_name']))
+        x1 = np.array([0, 0, 0, 0, 0, 0])
+
+        if datum['age'] <= 18:
+            x1[0] = 1
+        elif datum['age'] <= 29:
+            x1[1] = 1
+        elif datum['age'] <= 39:
+            x1[2] = 1
+        elif datum['age'] <= 49:
+            x1[3] = 1
+        elif datum['age'] <= 59:
+            x1[4] = 1
+        else:
+            x1[5] = 1
+
+        X1.append(x1)
+    
+    X0 = np.stack(X0)
+    X1 = np.stack(X1)  
+
+    model.fit([X0, X1], X0, batch_size=32, epochs=10, verbose=1)
+    model.save('model.h5')
+
 
 batch_size = 32
 model = autoencoder()
 
+train(model)
+
 test(model, np.expand_dims(cv2.imread('the_bean.jpg'), axis=0), np.array([[0, 0, 0, 0, 1, 0]]))
-
-
